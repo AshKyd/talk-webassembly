@@ -1,0 +1,307 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/js/reveal.js" integrity="sha384-E03qVGvrZcxBqTWA3LYMhNotwG2ExAP9G7/eOpIxOFCMzye79rfCOscFTW5WWEBw" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/css/reveal.css" integrity="sha384-5EvYd6nT2NcOprFRTHGGrZhONvxDjHkYFTJjcBOLNK3i0uGUbpeWjnDb/9X25dwF" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/css/theme/black.css" integrity="sha384-Ho2N6WdQU1NcUHwF0p0a34AnTQ9NmY2Y5aW0DzKeZrC0CYW/OgHHlOB6EX7vZi4d" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css" />
+
+
+        <script defer src="https://cdn.jsdelivr.net/emojione/2.2.7/lib/js/emojione.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/emojione/2.2.7/assets/css/emojione.min.css"/>
+
+        <style type="text/css">
+          .reveal section img.emojione{margin:0;padding:0;background:transparent;box-shadow:none;border:none;}
+          .reveal section img.plain{background:transparent;}
+          .reveal section img.plain.glow{box-shadow:0 0 200px white;background:rgba(255,255,255,.5);}
+          .row{display:flex;}
+          .row > *{width:50%;text-align:left;}
+          .reveal table{color:#fff;}
+          .reveal table pre{width:auto;margin:0;box-shadow: none;}
+        </style>
+
+        <script defer>
+          document.addEventListener('DOMContentLoaded', () => {
+            emojione.imageType = 'svg';
+            document.body.innerHTML = emojione.toImage(document.body.innerHTML);
+            Reveal.initialize({
+              history: true,
+            });
+          });
+        </script>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section data-background="#262530"><h1>WebAssembly</h1></section>
+                <section data-background="#262530">
+                  <blockquote cite="http://webassembly.org/">WebAssembly (or wasm) is a new portable, size- and
+                    load-time-efficient format suitable for compilation to the web.</blockquote>
+                    - <a href="http://webassembly.org/">🔎 webassembly.org</a>
+                </section>
+                <section data-background="#262530">
+                  <h2>What is it?</h2>
+                  <ul>
+                    <li>wasm is <em>not</em> a language</li>
+                    <li class="fragment">binary format/bytecode</li>
+                    <li class="fragment">runs in the wasm stack machine</li>
+                    <li class="fragment">a compile target</li>
+                  </ul>
+                  <aside class="notes">
+                    To start things right off, WebAssembly is <em>not</em> a
+                    programming language.
+
+                    While Javascript is a programming language, WebAssembly is
+                    a binary format containing compiled bytecode. This means
+                    distributing a wasm app you're distributing a precompiled
+                    binary file that gets interpreted on the target computer.
+
+                    This binary file runs in a specific interpreter called the
+                    wasm stack machine, and is comparable to how languages like
+                    Java or .NET run in their respective virtual machines.
+                  </aside>
+                </section>
+                <section data-background="#262530">
+                  <h2>Comparison</h2>
+                  <p>(you don't have to understand this)</p>
+<div class="fragment">
+<table>
+  <thead><tr>
+    <th>C++</th>
+    <th>Binary</th>
+    <th>Text</th>
+  </tr></thead><tbody>
+  <tr>
+    <td><pre>int factorial(int n) {
+  if (n == 0)
+    return 1;
+  else
+    return n * factorial(n-1);
+}</pre></td>
+    <td><pre>20 00
+42 00
+51
+04 7e
+42 01
+05
+20 00
+20 00
+42 01
+7d
+10 00
+7e
+0b</pre></td>
+    <td><pre>get_local 0
+i64.const 0
+i64.eq
+if i64
+    i64.const 1
+else
+    get_local 0
+    get_local 0
+    i64.const 1
+    i64.sub
+    call 0
+    i64.mul
+end</pre></td>
+  </tr>
+</tbody></table>
+<a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format">🔎 understanding wasm text format</a>
+</div>
+<aside class="notes">
+To understand what's going on here, I want to show some side-by-side examples
+to illustrate what's going on. Don't worry about understanding what's going
+on here, the important part is the comparison.
+
+On the left we have some fairly simple C++ code as our input. Once compiled this
+is converted to the bitcode in the binary column, to be parsed by the wasm VM.
+
+However the third column is a low-level textual representation which you'll
+see when you view source in a browser. There's a few different representations
+like this at the moment, but this is the one the MDN went with.
+</aside>
+                </section>
+                <section data-background="#2E4554">
+                  <h2>y tho?</h2>
+                  <ul>
+                    <li class="fragment">fast</li>
+                    <li class="fragment">efficient</li>
+                    <li class="fragment">think 🎮 &amp; 📱</li>
+                    <li class="fragment">limitless use cases</li>
+                  </ul>
+                  <aside class="notes">
+                    It's small in filesize since it's a compiled output rather
+                    than a source code document. It's speed-efficient
+                    because it doesn't have to parse any JS at boot time, and
+                    it is a lot lower level than JS so the goal is to run at
+                    native speed.
+
+                    For me, the two big applications are games and mobile, where
+                    games are performance intensive and mobile is light on
+                    resources. In both cases having smaller, faster code is of
+                    benefit.
+                  </aside>
+                </section>
+                <section data-background="#2E4554">
+                  <h2>Some history</h2>
+                </section>
+                <section data-background="#2E4554">
+                  <h2>
+                    <a href="https://github.com/kripken/emscripten">
+                      <img alt="emscripten" src="images/emscripten-logo.svg" class="plain">
+                    </a>
+                  </h2>
+                  <p>compiles C and C++ into JavaScript</p>
+                  <p class="fragment">port <a href="https://github.com/kripken/emscripten/wiki/Porting-Examples-and-Demos">everything</a> to the browser!</p>
+                  <aside class="notes">
+                    So to give you a little bit of history, in about 2013 a new
+                    tool called emscripten hit the scene which allowed devs to
+                    compile C &amp; C++ for the web.
+
+                    This was a time of crazy experiments with everything from
+                    the python interpteter to the Linux kernel being ported to
+                    the browser. You name it, it was ported. It really opened
+                    up the web as the one true platform..
+
+                    The biggest thing this enabled in my opinion was gaming.
+                    Both the Unity and Unreal game engines implemented features
+                    to export to the web via emscripten, making it possible to
+                    develop high quality games for the web.
+                  </aside>
+                </section>
+                <section data-background="#2E4554">
+                  <h2>Random cool stuff</h2>
+                  <ul>
+                    <li>Unity, Unreal &amp; other game engines</li>
+                    <li>languages: lua, python, ruby, perl</li>
+                    <li>sqlite, qemu, ffmpeg</li>
+                  </ul>
+                  <p class="fragment">and so much more&hellip;</p>
+                </section>
+                <section data-background="#2E4554">
+                  <div class="row">
+                    <div>
+                      <h3>Recently</h3>
+                      <ul>
+                        <li>Internet Archive</li>
+                        <li>play old games!</li>
+                        <li><a href="https://github.com/jsmess/jsmess">MAME</a> &amp; <a href="https://github.com/dreamlayers/em-dosbox">DOSBox</a></li>
+                        <li>all emscripten</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <img src="images/internet-archive-tall.png">
+                    </div>
+                  </div>
+                  <aside class="notes">
+                    One of my favourite implementations is the Internet Archive's
+                    DOS game archive. They used emscripten compiled versions of
+                    MAME and DOSBox, emulators that allow you to run software
+                    for thirty year old architectures in the browser.
+
+                    In doing so they were able to preserve some classic games
+                    and bring them to new generations. My favourite is probably
+                    Simcity (a classic!) You should definitely check them out.
+                  </aside>
+                </section>
+                <section data-background="#2E4554">
+                  <h3>Javascript is slow 😢</h3>
+                  <ul class="fragment">
+                    <li><a href="https://asmjs.org/">asm.js</a></li>
+                    <li>a subset of JavaScript</li>
+                    <li>ahead-of-time compiling engine optimizes code</li>
+                    <li class="fragment">still sllowwww 😭</li>
+                  </ul>
+                  <aside class="notes">
+                    This brings me to the next point, which is that despite all
+                    the recent advances, Javascript is still pretty slow.
+                    Especially when running emulators and other high-cpu tasks.
+
+                    To counter this, the emscripten project introduced the idea
+                    of asm.js. This is a subset of Javascript with a bunch of
+                    compiler hints included as comments in the code.
+
+                    What this means is that your browser would download the
+                    asm.js code, run a compile step over it, then execute the
+                    optimized code at much faster speeds than with regular JS.
+
+                    While this is an incredibly cool piece of tech, on larger
+                    projects you'd often wait for days for that compile step to
+                    run and we're ultimately still limited to things Javascript
+                    can handle so we can't make as many optimizations as we'd
+                    like.
+                  </aside>
+                </section>
+                <section data-background="#2E4554">
+                  <h2>Enter WebAssembly</h2>
+                  <ul>
+                    <li class="fragment">iteration on everything we've learned</li>
+                    <li class="fragment">same toolchain</li>
+                    <li class="fragment">asm.js is the polyfill<sup><a href="https://brendaneich.com/2015/06/from-asm-js-to-webassembly/">1</a></li>
+                    <li class="fragment">all this cool stuff is coming to wasm :tada:</li>
+                  </ul>
+                </section>
+                <section data-background="#48282C">
+                  <section>
+                    <h2>How it works</h2>
+                    <ul>
+                      <li class="fragment">compile code (c, c++, rust etc) → <code>.wasm</code></li>
+                      <li class="fragment">load up your module</li>
+                      <li class="fragment">reach for the stars! 🚀</li>
+                    </ul>
+                  </section>
+                  <section>
+                    <h2>Compile code</h2>
+                    <h3>C</h3>
+                    <pre><code>emcc main.c -s WASM=1 -o out.html</code></pre>
+                    <h3>Rust</h3>
+                    <pre><code>rustc --target=wasm32-unknown-emscripten main.rs -o out.html</code></pre>
+                  </section>
+                  <section>
+                    <h2>Emscripten demo!</h2>
+                  </section>
+                  <section>
+                    <h2>WebAssembly API</h2>
+                  </section>
+                  <section>
+                    <h2>Loading WASM</h2>
+                  </section>
+                  <section>
+                    <h2>WASM loading demo!</h2>
+                  </section>
+                </section>
+                <section data-background="#28483D">
+                  <h2>Real world</h2>
+                  <ul>
+                    <li class="fragment">Template rendering</li>
+                  </ul>
+                </section>
+                <section>
+                  <h2>Other APIs</h2>
+                  <ul>
+                    <li>Memory</li>
+                    <li>Tables</li>
+                  </ul>
+                </section>
+                <section>
+                  <h2>Security</h2>
+                </section>
+                <section>
+                  <h2>Workers</h2>
+                </section>
+                <section>
+                  <h2>Performance</h2>
+                </section>
+                <section>
+                  <h2>Debugging</h2>
+                </section>
+                <section>
+                  <h2>TODO</h2>
+                  <ul>
+                    <li class="fragment">Sourcemaps :scream:</li>
+                  </ul>
+                </section>
+            </div>
+        </div>
+    </body>
+</html>
