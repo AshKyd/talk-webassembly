@@ -11,6 +11,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/emojione/2.2.7/assets/css/emojione.min.css"/>
 
         <style type="text/css">
+          body{background: #262530;}
+          .reveal blockquote{padding: 1em;border-radius: 1em;}
           .reveal section img.emojione{margin:0;padding:0;background:transparent;box-shadow:none;border:none;}
           .reveal section img.plain{background:transparent;}
           .reveal section img.plain.glow{box-shadow:0 0 200px white;background:rgba(255,255,255,.5);}
@@ -18,6 +20,7 @@
           .row > *{width:50%;text-align:left;}
           .reveal table{color:#fff;}
           .reveal table pre{width:auto;margin:0;box-shadow: none;}
+          .reveal ul.no-bullets{list-style:none;}
         </style>
 
         <script defer>
@@ -26,6 +29,8 @@
             document.body.innerHTML = emojione.toImage(document.body.innerHTML);
             Reveal.initialize({
               history: true,
+              width:1280,
+              height:720,
             });
           });
         </script>
@@ -33,13 +38,16 @@
     <body>
         <div class="reveal">
             <div class="slides">
-                <section data-background="#262530"><h1>WebAssembly</h1></section>
-                <section data-background="#262530">
+                <section>
+                  <h1><img src="images/webassembly-logo.svg" alt="WebAssembly" class="plain"></h1>
+                  <p style="font-size:0.6em;">@ashkyd | ash.ms</p>
+                </section>
+                <section>
                   <blockquote cite="http://webassembly.org/">WebAssembly (or wasm) is a new portable, size- and
                     load-time-efficient format suitable for compilation to the web.</blockquote>
-                    - <a href="http://webassembly.org/">🔎 webassembly.org</a>
+                    <a href="http://webassembly.org/">webassembly.org</a>
                 </section>
-                <section data-background="#262530">
+                <section>
                   <h2>What is it?</h2>
                   <ul>
                     <li>wasm is <em>not</em> a language</li>
@@ -57,11 +65,13 @@
                     binary file that gets interpreted on the target computer.
 
                     This binary file runs in a specific interpreter called the
-                    wasm stack machine, and is comparable to how languages like
-                    Java or .NET run in their respective virtual machines.
+                    wasm stack machine, and is comparable to other languages
+                    such as with the Java Virtual Machine, or Microsoft's
+                    Common Language Runtime which all their .NET languages
+                    compile down to.
                   </aside>
                 </section>
-                <section data-background="#262530">
+                <section>
                   <h2>Comparison</h2>
                   <p>(you don't have to understand this)</p>
 <div class="fragment">
@@ -106,7 +116,7 @@ else
 end</pre></td>
   </tr>
 </tbody></table>
-<a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format">🔎 understanding wasm text format</a>
+<a href="https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format">understanding wasm text format</a>
 </div>
 <aside class="notes">
 To understand what's going on here, I want to show some side-by-side examples
@@ -121,7 +131,7 @@ see when you view source in a browser. There's a few different representations
 like this at the moment, but this is the one the MDN went with.
 </aside>
                 </section>
-                <section data-background="#2E4554">
+                <section data-background="images/why.png">
                   <h2>y tho?</h2>
                   <ul>
                     <li class="fragment">fast</li>
@@ -142,69 +152,74 @@ like this at the moment, but this is the one the MDN went with.
                     benefit.
                   </aside>
                 </section>
-                <section data-background="#2E4554">
-                  <h2>Some history</h2>
-                </section>
-                <section data-background="#2E4554">
-                  <h2>
-                    <a href="https://github.com/kripken/emscripten">
-                      <img alt="emscripten" src="images/emscripten-logo.svg" class="plain">
-                    </a>
-                  </h2>
-                  <p>compiles C and C++ into JavaScript</p>
-                  <p class="fragment">port <a href="https://github.com/kripken/emscripten/wiki/Porting-Examples-and-Demos">everything</a> to the browser!</p>
-                  <aside class="notes">
-                    So to give you a little bit of history, in about 2013 a new
-                    tool called emscripten hit the scene which allowed devs to
-                    compile C &amp; C++ for the web.
+                <section data-background="images/demos-blurred.jpg" data-background-transition="slide">
+                  <section>
+                    <h2>Some history</h2>
+                  </section>
+                  <section>
+                    <h2>
+                      <a href="https://github.com/kripken/emscripten">
+                        <img alt="emscripten" src="images/emscripten-logo.svg" class="plain">
+                      </a>
+                    </h2>
+                    <p>compiles C and C++ into JavaScript</p>
+                    <p class="fragment">port <a href="https://github.com/kripken/emscripten/wiki/Porting-Examples-and-Demos">everything</a> to the browser!</p>
+                    <aside class="notes">
+                      So to give you a little bit of history, in about 2013 a new
+                      tool called emscripten hit the scene which allowed devs to
+                      compile C &amp; C++ for the web.
 
-                    This was a time of crazy experiments with everything from
-                    the python interpteter to the Linux kernel being ported to
-                    the browser. You name it, it was ported. It really opened
-                    up the web as the one true platform..
+                      This was a time of crazy experiments with everything from
+                      the python interpteter to the Linux kernel being ported to
+                      the browser. You name it, it was ported. It really opened
+                      up the web as the one true platform..
 
-                    The biggest thing this enabled in my opinion was gaming.
-                    Both the Unity and Unreal game engines implemented features
-                    to export to the web via emscripten, making it possible to
-                    develop high quality games for the web.
-                  </aside>
-                </section>
-                <section data-background="#2E4554">
-                  <h2>Random cool stuff</h2>
-                  <ul>
-                    <li>Unity, Unreal &amp; other game engines</li>
-                    <li>languages: lua, python, ruby, perl</li>
-                    <li>sqlite, qemu, ffmpeg</li>
-                  </ul>
-                  <p class="fragment">and so much more&hellip;</p>
-                </section>
-                <section data-background="#2E4554">
-                  <div class="row">
-                    <div>
-                      <h3>Recently</h3>
-                      <ul>
-                        <li>Internet Archive</li>
-                        <li>play old games!</li>
-                        <li><a href="https://github.com/jsmess/jsmess">MAME</a> &amp; <a href="https://github.com/dreamlayers/em-dosbox">DOSBox</a></li>
-                        <li>all emscripten</li>
-                      </ul>
+                      The biggest thing this enabled in my opinion was gaming.
+                      Both the Unity and Unreal game engines implemented features
+                      to export to the web via emscripten, making it possible to
+                      develop high quality games for the web.
+                    </aside>
+                  </section>
+                  <section data-background="images/demos-blurred.jpg">
+                    <h2>Random cool stuff</h2>
+                    <ul>
+                      <li>Unity, Unreal &amp; other game engines</li>
+                      <li>languages: lua, python, ruby, perl</li>
+                      <li>sqlite, qemu, ffmpeg</li>
+                    </ul>
+                    <p class="fragment">and so much more&hellip;</p>
+                  </section>
+                  <section data-background="images/demos-blurred.jpg">
+                    <div class="row">
+                      <div>
+                        <h3>Recently</h3>
+                        <ul>
+                          <li>Internet Archive</li>
+                          <li>play old games!</li>
+                          <li><a href="https://github.com/jsmess/jsmess">MAME</a> &amp; <a href="https://github.com/dreamlayers/em-dosbox">DOSBox</a></li>
+                          <li>all emscripten</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <img src="images/internet-archive-tall.png">
+                      </div>
                     </div>
-                    <div>
-                      <img src="images/internet-archive-tall.png">
-                    </div>
-                  </div>
-                  <aside class="notes">
-                    One of my favourite implementations is the Internet Archive's
-                    DOS game archive. They used emscripten compiled versions of
-                    MAME and DOSBox, emulators that allow you to run software
-                    for thirty year old architectures in the browser.
+                    <aside class="notes">
+                      One of my favourite implementations is the Internet Archive's
+                      DOS game archive. They used emscripten compiled versions of
+                      MAME and DOSBox, emulators that allow you to run software
+                      for thirty year old architectures in the browser.
 
-                    In doing so they were able to preserve some classic games
-                    and bring them to new generations. My favourite is probably
-                    Simcity (a classic!) You should definitely check them out.
-                  </aside>
+                      In doing so they were able to preserve some classic games
+                      and bring them to new generations. My favourite is probably
+                      Simcity (a classic!) You should definitely check them out.
+                    </aside>
+                  </section>
+                  <section data-background="images/demos.jpg">
+                    <h2 style="background:black;padding:0.2em;color:white;">All the games</h2>
+                  </section>
                 </section>
-                <section data-background="#2E4554">
+                <section>
                   <h3>Javascript is slow 😢</h3>
                   <ul class="fragment">
                     <li><a href="https://asmjs.org/">asm.js</a></li>
@@ -232,7 +247,7 @@ like this at the moment, but this is the one the MDN went with.
                     like.
                   </aside>
                 </section>
-                <section data-background="#2E4554">
+                <section>
                   <h2>Enter WebAssembly</h2>
                   <ul>
                     <li class="fragment">iteration on everything we've learned</li>
@@ -241,8 +256,8 @@ like this at the moment, but this is the one the MDN went with.
                     <li class="fragment">all this cool stuff is coming to wasm :tada:</li>
                   </ul>
                 </section>
-                <section data-background="#48282C">
-                  <section>
+                <section>
+                  <section data-background="images/matrix/matrix-1.png" data-background-transition="slide">
                     <h2>How it works</h2>
                     <ul>
                       <li class="fragment">compile code (c, c++, rust etc) → <code>.wasm</code></li>
@@ -250,27 +265,52 @@ like this at the moment, but this is the one the MDN went with.
                       <li class="fragment">reach for the stars! 🚀</li>
                     </ul>
                   </section>
-                  <section>
+                  <section data-background="images/matrix/matrix-2.png" data-background-transition="slide">
                     <h2>Compile code</h2>
                     <h3>C</h3>
                     <pre><code>emcc main.c -s WASM=1 -o out.html</code></pre>
                     <h3>Rust</h3>
                     <pre><code>rustc --target=wasm32-unknown-emscripten main.rs -o out.html</code></pre>
                   </section>
-                  <section>
+                  <section data-background="images/matrix/matrix-3.png" data-background-transition="slide">
                     <h2>Emscripten demo!</h2>
+                    <ul>
+                      <li class="fragment">wasm runs natively</li>
+                      <li class="fragment">debugging support</li>
+                      <li class="fragment">emscripten creates lots of boilerplate</li>
+                    </ul>
                   </section>
-                  <section>
+                  <section data-background="images/matrix/matrix-4.png" data-background-transition="slide">
+                    <h2>Compiler Output</h2>
+                    <blockquote>
+                      Note that the .wasm file is not standalone - it's not easy
+                      to manually run it without that .js code, as it depends on
+                      imports that integrate with JS.
+                    </blockquote>
+                    <p>- <a href="https://github.com/kripken/emscripten/wiki/WebAssembly#compiler-output">emscripten wiki</a></p>
+                  </section>
+                  <section data-background="images/matrix/matrix-5.png" data-background-transition="slide">
                     <h2>WebAssembly API</h2>
+                    <pre><code><span class="fragment">fetch('program.wasm')</span>
+  <span class="fragment">.then( response   => response.arrayBuffer() )</span>
+  <span class="fragment">.then( bytes      => <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/compile">WebAssembly.compile</a>(bytes) )</span>
+  <span class="fragment">.then( wasmModule => <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/instantiate">WebAssembly.instantiate</a>(wasmModule, {
+    env: { printf: console.log }
+  }) )</span>
+  <span class="fragment">.then( results    => results.exports.main() );</span></code></pre>
+                    <p class="fragment"><strong>Eventually</strong>: <code>&lt;script type='module'&gt;</code> or ES6 imports</p>
                   </section>
-                  <section>
-                    <h2>Loading WASM</h2>
-                  </section>
-                  <section>
+                  <section data-background="images/matrix/matrix-6.png" data-background-transition="slide">
                     <h2>WASM loading demo!</h2>
+                    <ul>
+                      <li class="fragment">symbiotic with JS</li>
+                      <li class="fragment">importObject provides JS objects to WASM code</li>
+                      <li class="fragment"><a href="http://webassembly.org/docs/semantics/#Types">non-numeric types</a> must be implemented manually</li>
+                      <li class="fragment">probably stick with emscripten for now</li>
+                    </ul>
                   </section>
                 </section>
-                <section data-background="#28483D">
+                <section>
                   <h2>Real world</h2>
                   <ul>
                     <li class="fragment">Template rendering</li>
@@ -284,22 +324,34 @@ like this at the moment, but this is the one the MDN went with.
                   </ul>
                 </section>
                 <section>
-                  <h2>Security</h2>
-                </section>
-                <section>
                   <h2>Workers</h2>
                 </section>
-                <section>
+                <section data-background="images/performance.png">
                   <h2>Performance</h2>
                 </section>
-                <section>
+                <section data-background="images/bugs-or8.png" data-background-transition="slide">
                   <h2>Debugging</h2>
                 </section>
-                <section>
-                  <h2>TODO</h2>
+                <section data-background="images/security-or8.png" data-background-transition="slide">
+                  <h2>Security</h2>
                   <ul>
-                    <li class="fragment">Sourcemaps :scream:</li>
+                    <li>Sandbox</li>
+                    <li>Same origin policy</li>
+                    <li>Control flow integrity</li>
+                    <li>Memory safety</li>
                   </ul>
+                  <p class="fragment"><a href="http://webassembly.org/docs/security/">webassembly.org/docs/security</a></p>
+                </section>
+                <section>
+                  <h2>(a glimpse of) the future</h2>
+                  <ul class="no-bullets">
+                    <li class="fragment">:scream: sourcemaps</li>
+                    <li class="fragment">👷 improved tooling</li>
+                    <li class="fragment">🚮 garbage collection</li>
+                    <li class="fragment">🏗️ DOM access &amp; web API integration</li>
+                    <li class="fragment">✨ support for JS data types (strings, objects)</li>
+                  </ul>
+                  <p><a href="http://webassembly.org/docs/future-features/">wasm future features</a></p>
                 </section>
             </div>
         </div>
