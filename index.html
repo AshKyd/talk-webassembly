@@ -38,16 +38,17 @@
     <body>
         <div class="reveal">
             <div class="slides">
-                <section>
+                <section data-time="25">
                   <h1><img src="images/webassembly-logo.svg" alt="WebAssembly" class="plain"></h1>
                   <p style="font-size:0.6em;">@ashkyd | ash.ms</p>
+                  <p><small><script>document.write(window.location)</script></small></p>
                 </section>
-                <section>
+                <section data-time="15">
                   <blockquote cite="http://webassembly.org/">WebAssembly (or wasm) is a new portable, size- and
                     load-time-efficient format suitable for compilation to the web.</blockquote>
                     <a href="http://webassembly.org/">webassembly.org</a>
                 </section>
-                <section>
+                <section data-time="60">
                   <h2>What is it?</h2>
                   <ul>
                     <li>wasm is <em>not</em> a language</li>
@@ -63,15 +64,19 @@
                     a binary format containing compiled bytecode. This means
                     distributing a wasm app you're distributing a precompiled
                     binary file that gets interpreted on the target computer.
+                    You as the programmer don't write this code directly.
 
                     This binary file runs in a specific interpreter called the
                     wasm stack machine, and is comparable to other languages
                     such as with the Java Virtual Machine, or Microsoft's
                     Common Language Runtime which all their .NET languages
                     compile down to.
+
+                    So it's a lower level compile target that a number of
+                    existing languages can be compiled to.
                   </aside>
                 </section>
-                <section>
+                <section data-time="60">
                   <h2>Comparison</h2>
                   <p>(you don't have to understand this)</p>
 <div class="fragment">
@@ -127,11 +132,10 @@ On the left we have some fairly simple C++ code as our input. Once compiled this
 is converted to the bitcode in the binary column, to be parsed by the wasm VM.
 
 However the third column is a low-level textual representation which you'll
-see when you view source in a browser. There's a few different representations
-like this at the moment, but this is the one the MDN went with.
+see when you view source in a browser.
 </aside>
                 </section>
-                <section data-background="images/why.png">
+                <section data-background="images/why.png" data-time="100">
                   <h2>y tho?</h2>
                   <ul>
                     <li class="fragment">fast</li>
@@ -140,23 +144,88 @@ like this at the moment, but this is the one the MDN went with.
                     <li class="fragment">limitless use cases</li>
                   </ul>
                   <aside class="notes">
-                    It's small in filesize since it's a compiled output rather
-                    than a source code document. It's speed-efficient
+                    So why do we need this? What does it give us that regular
+                    Javascript doesn't?
+
+                    For starters it's fast. It's speed-efficient
                     because it doesn't have to parse any JS at boot time, and
                     it is a lot lower level than JS so the goal is to run at
                     native speed.
 
-                    For me, the two big applications are games and mobile, where
+                    Also, it's crazy efficient for two reasons. Firstly the
+                    compiled binary size is much smaller than traditional
+                    Javascript code. While Javascript can be compressed with
+                    gzip, you're still going to have to decompress and parse
+                    that giant glob of text. It's also efficient because the
+                    output is much lower to the metal; with Javascript you need
+                    to parse, compile, and optimize the code straight off the
+                    bat. With a large codebase this can take a fair amount of
+                    time. Further, there's more reiptimization steps as the code
+                    runs, as well as garbage collection which can result in poor
+                    performance.
+
+                    With WebAssembly, you can skip all of these steps, as
+                    it only needs a small compile task to convert the wasm
+                    bytecode into something the CPU understands. All the
+                    compilation &amp; optimization has been done ahead of time.
+
+                    So what are the implications? For me, the two big
+                    applications are games and mobile, where
                     games are performance intensive and mobile is light on
-                    resources. In both cases having smaller, faster code is of
-                    benefit.
+                    resources.
+
+                    In the gaming case we're doing a lot of computation in real-
+                    time, so we need our code to consistently run lightning fast
+                    without pauses for garbage collection.
+
+                    On the opposite end of the spectrum we have mobile, where
+                    we're CPU constrained so our code needs to be super
+                    efficient to run smoothly. Again, wasm gives us this by
+                    being physically smaller, and has fewer compile steps to
+                    get it to the CPU.
+
+                    So these are the two big examples I can think of off the top
+                    of my head, but there's limitless use cases and eventually I
+                    can see this being used in all kinds of libraries and web
+                    apps where extra performance is required.
                   </aside>
                 </section>
                 <section data-background="images/demos-blurred.jpg" data-background-transition="slide">
-                  <section>
+                  <section data-time="60">
                     <h2>Some history</h2>
+                    <div class="fragment">
+                      <img class="plain" src="images/js-history-or8.png" alt="js history" style="width:70%;">
+                      <p><a href="https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/">a cartoon intro to webassembly</a></p>
+                    </div>
+                    <aside class="notes">
+                      So before we go any further I want to give you a brief
+                      history lesson.
+
+                      If you've been following the Mozilla Hacks blog you've
+                      probably seen this graph already. It's showing the history
+                      of Javascript performance.
+
+                      In the beginning, Javascript was a toy. It was interpreted
+                      at runtime and was really slow.
+
+                      Then in 2008 along came
+                      the Javascript wars and just in time compilation improved
+                      performance significantly. The gist of JIT is that the
+                      Javascript code could be compiled down to machine code at
+                      runtime, rather than interpreted each run. This brought
+                      significant performance improvements which made Javascript
+                      much more suitable for proper web apps.
+
+                      Performance has improved slowly ever since, but with
+                      WebAssembly we're about to have the same kind of performance
+                      boom as we had with the introduction of JIT. This is
+                      understandably very exciting.
+
+                      Since JIT made Javascript super fast, we've ended up with
+                      some cool technologies come out to exploit that speed.
+                    </aside>
                   </section>
-                  <section>
+                  <section data-time="30">
                     <h2>
                       <a href="https://github.com/kripken/emscripten">
                         <img alt="emscripten" src="images/emscripten-logo.svg" class="plain">
@@ -165,22 +234,22 @@ like this at the moment, but this is the one the MDN went with.
                     <p>compiles C and C++ into JavaScript</p>
                     <p class="fragment">port <a href="https://github.com/kripken/emscripten/wiki/Porting-Examples-and-Demos">everything</a> to the browser!</p>
                     <aside class="notes">
-                      So to give you a little bit of history, in about 2013 a new
+
+                      In about 2013 a new
                       tool called emscripten hit the scene which allowed devs to
                       compile C &amp; C++ for the web.
+
+                      If you remember a while back we had some talks on
+                      using emscripten to port old games to the web.
 
                       This was a time of crazy experiments with everything from
                       the python interpteter to the Linux kernel being ported to
                       the browser. You name it, it was ported. It really opened
-                      up the web as the one true platform..
-
-                      The biggest thing this enabled in my opinion was gaming.
-                      Both the Unity and Unreal game engines implemented features
-                      to export to the web via emscripten, making it possible to
-                      develop high quality games for the web.
+                      up the web as the one true platform on which everything
+                      could be run.
                     </aside>
                   </section>
-                  <section data-background="images/demos-blurred.jpg">
+                  <section data-background="images/demos-blurred.jpg" data-time="50">
                     <h2>Random cool stuff</h2>
                     <ul>
                       <li>Unity, Unreal &amp; other game engines</li>
@@ -188,8 +257,20 @@ like this at the moment, but this is the one the MDN went with.
                       <li>sqlite, qemu, ffmpeg</li>
                     </ul>
                     <p class="fragment">and so much more&hellip;</p>
+                    <aside class="notes">
+                      The biggest thing this enabled in my opinion was gaming.
+                      Both the Unity and Unreal game engines implemented features
+                      to export to the web via emscripten, making it possible to
+                      develop high quality games for the web.
+
+                      All manner of programming languages were ported too, so
+                      you can run lua, pryhon, ruby or perl scripts inside the
+                      Javascript engine for instance.
+
+                      ~ explain sqlite, qemu, ffmpeg ~
+                    </aside>
                   </section>
-                  <section data-background="images/demos-blurred.jpg">
+                  <section data-background="images/demos-blurred.jpg" data-time="30">
                     <div class="row">
                       <div>
                         <h3>Recently</h3>
@@ -219,7 +300,7 @@ like this at the moment, but this is the one the MDN went with.
                     <h2 style="background:black;padding:0.2em;color:white;">All the games</h2>
                   </section>
                 </section>
-                <section>
+                <section data-time="40">
                   <h3>Javascript is slow 😢</h3>
                   <ul class="fragment">
                     <li><a href="https://asmjs.org/">asm.js</a></li>
@@ -247,30 +328,92 @@ like this at the moment, but this is the one the MDN went with.
                     like.
                   </aside>
                 </section>
-                <section>
+                <section data-time="40">
                   <h2>Enter WebAssembly</h2>
                   <ul>
                     <li class="fragment">iteration on everything we've learned</li>
                     <li class="fragment">same toolchain</li>
-                    <li class="fragment">asm.js is the polyfill<sup><a href="https://brendaneich.com/2015/06/from-asm-js-to-webassembly/">1</a></li>
+                    <li class="fragment"><strong>asm.js is the polyfill</strong><sup><a href="https://brendaneich.com/2015/06/from-asm-js-to-webassembly/">1</a></li>
                     <li class="fragment">all this cool stuff is coming to wasm :tada:</li>
                   </ul>
+                  <aside class="notes">
+                    So this is where WebAssembly comes in. Ultimately it's an
+                    iteration on the work done with asm.js and everything we've
+                    learned from that experience.
+
+                    Further, today's emscripten tools can output to webassembly
+                    which means we've got a faster 1:1 map to webassembly with
+                    the same toolchain.
+
+                    Thirdly, and this is the cool thing, wasm implements all the
+                    same featuers as asm.js to the point that asm.js can be used
+                    as the polyfill for wasm in browsers that don't implement
+                    it yet. This means we can start using webassembly today
+                    without having to worry about backward compatibility.
+
+                    So finally what this means is that all this cool stuff from
+                    emscriptenn is coming to wasm, with all the performance
+                    benefits that entails.
+
+                    We can finally run quake at native speeds in the browser!
+                  </aside>
                 </section>
                 <section>
-                  <section data-background="images/matrix/matrix-1.png" data-background-transition="slide">
+                  <section data-background="images/matrix/matrix-1.png" data-background-transition="slide" data-time="30">
                     <h2>How it works</h2>
                     <ul>
                       <li class="fragment">compile code (c, c++, rust etc) → <code>.wasm</code></li>
                       <li class="fragment">load up your module</li>
                       <li class="fragment">reach for the stars! 🚀</li>
                     </ul>
+                    <aside class="notes">
+                      So let's dive into how it works from a high level and go
+                      into some examples.
+
+                      First up you've written some code, that you want to run in
+                      the browser in a language like C, C++, or Rust. You need
+                      to compile this code using a tool like emscripten, which
+                      outputs a binary wasm file, looking much the same as the
+                      binary format we saw earlier.
+
+                      The next step is to load up and bootstrap your module
+                      using Javascript. Webassembly isn't a standalone language
+                      that runs in your browser, it still needs to interface
+                      with JS.
+
+                      Once you've done this, you're ready to go! This is what dreams are made of!
+                    </aside>
                   </section>
-                  <section data-background="images/matrix/matrix-2.png" data-background-transition="slide">
+                  <section data-background="images/matrix/matrix-2.png" data-background-transition="slide" data-time="55">
                     <h2>Compile code</h2>
                     <h3>C</h3>
                     <pre><code>emcc main.c -s WASM=1 -o out.html</code></pre>
                     <h3>Rust</h3>
                     <pre><code>rustc --target=wasm32-unknown-emscripten main.rs -o out.html</code></pre>
+                    <div class="aside">
+                      To do the actual compiling, there's a few different ways
+                      to go about it. C and C++ can both be compiled directly
+                      with emscripten's emcc command. I had to compile this
+                      manually because there's no Linux binaries available and
+                      it took a couple of hours, but on other platforms you
+                      should be able to install it straight from the emscripten
+                      sdk.
+
+                      Second up, for those of you who don't know Rust, it's a
+                      language aiming to be a safer, more concurrent version of
+                      C++ and it's what Mozilla are using to slowly replace
+                      Gecko with a rewrite of itself. If you're going to be
+                      writing webassembly stuff from scratch, this is probably
+                      the language I'd suggest you use because it's built by
+                      Mozilla and it catches a lot more issues before you run
+                      the code. Think of it as the TypeScript of C++.
+
+                      I've included Rust here because I wanted to teach myself
+                      as part of this exercise, but I didn't get very far with
+                      it, so it's here more as an FYI. The rust compiler has
+                      emscripten support built in, so you use the rust command
+                      to kick off the compile.
+                    </div>
                   </section>
                   <section data-background="images/matrix/matrix-3.png" data-background-transition="slide">
                     <h2>Emscripten demo!</h2>
@@ -279,6 +422,9 @@ like this at the moment, but this is the one the MDN went with.
                       <li class="fragment">debugging support</li>
                       <li class="fragment">emscripten creates lots of boilerplate</li>
                     </ul>
+                    <div class="aside">
+                      So let's get into an emscripten demo and see what we can do.
+                    </div>
                   </section>
                   <section data-background="images/matrix/matrix-4.png" data-background-transition="slide">
                     <h2>Compiler Output</h2>
@@ -302,35 +448,44 @@ like this at the moment, but this is the one the MDN went with.
                   </section>
                   <section data-background="images/matrix/matrix-6.png" data-background-transition="slide">
                     <h2>WASM loading demo!</h2>
+                    <p>Let's use the <a href="https://goo.gl/ANWHCQ">wasm explorer</a> to make some more sensible wasm</p>
                     <ul>
                       <li class="fragment">symbiotic with JS</li>
-                      <li class="fragment">importObject provides JS objects to WASM code</li>
+                      <li class="fragment">importObject provides JS objects to wasm code</li>
                       <li class="fragment"><a href="http://webassembly.org/docs/semantics/#Types">non-numeric types</a> must be implemented manually</li>
                       <li class="fragment">probably stick with emscripten for now</li>
                     </ul>
                   </section>
                 </section>
                 <section>
+                  <h2>Memory</h2>
+                  <ul>
+                    <li>resizeable ArrayBuffer</li>
+                    <li>access it from both JS &amp; wasm</li>
+                    <li>the only way you can pass around complex data types</li>
+                  </ul>
+                </section>
+                <section>
                   <h2>Real world</h2>
-                  <ul>
-                    <li class="fragment">Template rendering</li>
-                  </ul>
+                  <p class="fragment">freely licensed cat gif</p>
+                  <img class="plain fragment" src="images/cat.gif" alt="i don't know what I'm doing">
+                  <p class="fragment"><small><a href="https://commons.wikimedia.org/wiki/File:Cat.gif">by user Mkamale90</a> under the Creative Commons Attribution-Share Alike 3.0 Unported license</small></p>
+                  <p class="fragment">tldr: the tooling isn't good enough for everyday use</p>
                 </section>
-                <section>
-                  <h2>Other APIs</h2>
-                  <ul>
-                    <li>Memory</li>
-                    <li>Tables</li>
-                  </ul>
                 </section>
-                <section>
-                  <h2>Workers</h2>
-                </section>
-                <section data-background="images/performance.png">
+                <!-- <section data-background="images/performance.png">
                   <h2>Performance</h2>
-                </section>
+                  <ul>
+                    <li>Better in theory, still a WIP</li>
+                    <li>Reported slowness </li>
+                  </ul>
+                </section> -->
                 <section data-background="images/bugs-or8.png" data-background-transition="slide">
                   <h2>Debugging</h2>
+                  <ul>
+                    <li class="fragment">devtools</li>
+                    <li class="fragment"2>wasm text representation — no sourcemaps</li>
+                  </ul>
                 </section>
                 <section data-background="images/security-or8.png" data-background-transition="slide">
                   <h2>Security</h2>
@@ -342,6 +497,22 @@ like this at the moment, but this is the one the MDN went with.
                   </ul>
                   <p class="fragment"><a href="http://webassembly.org/docs/security/">webassembly.org/docs/security</a></p>
                 </section>
+                <section data-background="images/support.jpg" data-background-transition="slide" style="margin-left: -25%;">
+                  <h2>Browser Support</h2>
+                  <table>
+                    <thead>
+                    <tr><th>Browser</th><th>Version</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Firefox <br><small>desktop &amp; mobile</small></td><td>52 <br><small>march 28</small></td></tr>
+                    <tr><td>Chrome <br><small>desktop &amp; mobile</small></td><td>57<br><small>march 29</small></td></tr>
+                    <tr><td>Opera</td><td>44</td></tr>
+                    <tr><td>Safari</td><td>⛔</td></tr>
+                    <tr><td>Edge</td><td>⛔</td></tr>
+                    </tbody>
+                  </table>
+                  <p><small>Photo: <a href="https://www.flickr.com/photos/atoach/3922401551">Tim Green</a></small></p>
+                </section>
                 <section>
                   <h2>(a glimpse of) the future</h2>
                   <ul class="no-bullets">
@@ -352,6 +523,16 @@ like this at the moment, but this is the one the MDN went with.
                     <li class="fragment">✨ support for JS data types (strings, objects)</li>
                   </ul>
                   <p><a href="http://webassembly.org/docs/future-features/">wasm future features</a></p>
+                </section>
+                <section>
+                  <h2>Conclusion</h2>
+                  <p>❌ Probably too early for greenfields</p>
+                  <p>✔ Good for porting stuff</p>
+                </section>
+                <section data-time="25">
+                  <h1><img src="images/webassembly-logo.svg" alt="WebAssembly" class="plain"></h1>
+                  <p style="font-size:0.6em;">@ashkyd | ash.ms</p>
+                  <p><small><script>document.write(window.location)</script></small></p>
                 </section>
             </div>
         </div>
