@@ -423,9 +423,9 @@ see when you view source in a browser.
                       <li class="fragment">debugging support</li>
                       <li class="fragment">emscripten creates lots of boilerplate</li>
                     </ul>
-                    <div class="aside">
+                    <aside class="notes">
                       So let's get into an emscripten demo and see what we can do.
-                    </div>
+                    </aside>
                   </section>
                   <section data-background="images/matrix/matrix-4.png" data-background-transition="slide">
                     <h2>Compiler Output</h2>
@@ -475,6 +475,19 @@ see when you view source in a browser.
                 <section>
                   <h2>But…</h2>
                   <p>I don't expect it to take long</p>
+                </section>
+                <section>
+                  <h2>Prime use case</h2>
+                  <blockquote><p>WebDSP is a collection of
+                    algorithms designed to be building blocks for web
+                    appslications that operate on media data.</p>
+
+                    <p>The methods
+                    are written in C++ and compiled to WASM, and exposed as
+                    simple vanilla Javascript functions developers can run on
+                    the client side.</p>
+                  </blockquote>
+                  <p><a href="https://github.com/shamadee/web-dsp">web dsp</a></p>
                 </section>
                 </section>
                 <!-- <section data-background="images/performance.png">
@@ -530,8 +543,9 @@ see when you view source in a browser.
                 </section>
                 <section>
                   <h2>Conclusion</h2>
-                  <p>❌ Probably too early for greenfields</p>
-                  <p>✔ Good for porting stuff</p>
+                  <p>❌ probably too early for greenfields</p>
+                  <p>✔ good for porting stuff</p>
+                  <p class="fragment">👍 go hack stuff!</p>
                 </section>
                 <section data-time="25">
                   <h1><img src="images/webassembly-logo.svg" alt="WebAssembly" class="plain"></h1>
