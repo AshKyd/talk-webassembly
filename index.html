@@ -157,10 +157,10 @@ see when you view source in a browser.
                     Javascript code. While Javascript can be compressed with
                     gzip, you're still going to have to decompress and parse
                     that giant glob of text. It's also efficient because the
-                    output is much lower to the metal; with Javascript you need
+                    output is much closer to the metal; with Javascript you need
                     to parse, compile, and optimize the code straight off the
                     bat. With a large codebase this can take a fair amount of
-                    time. Further, there's more reiptimization steps as the code
+                    time. Further, there's more reoptimization steps as the code
                     runs, as well as garbage collection which can result in poor
                     performance.
 
@@ -381,7 +381,8 @@ see when you view source in a browser.
                       that runs in your browser, it still needs to interface
                       with JS.
 
-                      Once you've done this, you're ready to go! This is what dreams are made of!
+                      Once you've done this, you're ready to go! This is what
+                      dreams are made of! You can do anything you want!
                     </aside>
                   </section>
                   <section data-background="images/matrix/matrix-2.png" data-background-transition="slide" data-time="55">
@@ -390,7 +391,7 @@ see when you view source in a browser.
                     <pre><code>emcc main.c -s WASM=1 -o out.html</code></pre>
                     <h3>Rust</h3>
                     <pre><code>rustc --target=wasm32-unknown-emscripten main.rs -o out.html</code></pre>
-                    <div class="aside">
+                    <aside class="notes">
                       To do the actual compiling, there's a few different ways
                       to go about it. C and C++ can both be compiled directly
                       with emscripten's emcc command. I had to compile this
@@ -413,7 +414,7 @@ see when you view source in a browser.
                       it, so it's here more as an FYI. The rust compiler has
                       emscripten support built in, so you use the rust command
                       to kick off the compile.
-                    </div>
+                    </aside>
                   </section>
                   <section data-background="images/matrix/matrix-3.png" data-background-transition="slide">
                     <h2>Emscripten demo!</h2>
@@ -467,10 +468,13 @@ see when you view source in a browser.
                 </section>
                 <section>
                   <h2>Real world</h2>
-                  <p class="fragment">freely licensed cat gif</p>
                   <img class="plain fragment" src="images/cat.gif" alt="i don't know what I'm doing">
                   <p class="fragment"><small><a href="https://commons.wikimedia.org/wiki/File:Cat.gif">by user Mkamale90</a> under the Creative Commons Attribution-Share Alike 3.0 Unported license</small></p>
                   <p class="fragment">tldr: the tooling isn't good enough for everyday use</p>
+                </section>
+                <section>
+                  <h2>But…</h2>
+                  <p>I don't expect it to take long</p>
                 </section>
                 </section>
                 <!-- <section data-background="images/performance.png">
