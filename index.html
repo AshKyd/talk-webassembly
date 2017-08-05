@@ -1,17 +1,12 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/js/reveal.js" integrity="sha384-E03qVGvrZcxBqTWA3LYMhNotwG2ExAP9G7/eOpIxOFCMzye79rfCOscFTW5WWEBw" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/css/reveal.css" integrity="sha384-5EvYd6nT2NcOprFRTHGGrZhONvxDjHkYFTJjcBOLNK3i0uGUbpeWjnDb/9X25dwF" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/3.4.1/css/theme/black.css" integrity="sha384-Ho2N6WdQU1NcUHwF0p0a34AnTQ9NmY2Y5aW0DzKeZrC0CYW/OgHHlOB6EX7vZi4d" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css" />
-
-
-        <script defer src="https://cdn.jsdelivr.net/emojione/2.2.7/lib/js/emojione.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/emojione/2.2.7/assets/css/emojione.min.css"/>
+        <script defer src="libs/reveal.js"></script>
+        <link rel="stylesheet" href="libs/reveal.css">
+        <link rel="stylesheet" href="libs/black.css">
 
         <style type="text/css">
-          body{background: #262530;}
+          body{background: #000;font-family:'Source Sans Pro', sans-serif;color:white;}
           .reveal blockquote{padding: 1em;border-radius: 1em;}
           .reveal section img.emojione{margin:0;padding:0;background:transparent;box-shadow:none;border:none;}
           .reveal section img.plain{background:transparent;}
@@ -21,12 +16,11 @@
           .reveal table{color:#fff;}
           .reveal table pre{width:auto;margin:0;box-shadow: none;}
           .reveal ul.no-bullets{list-style:none;}
+          .reveal p.attribution{font-size:0.7em;opacity:0.9em;}
         </style>
 
         <script defer>
           document.addEventListener('DOMContentLoaded', () => {
-            emojione.imageType = 'svg';
-            document.body.innerHTML = emojione.toImage(document.body.innerHTML);
             Reveal.initialize({
               history: true,
               width:1280,
@@ -239,9 +233,6 @@ see when you view source in a browser.
                       tool called emscripten hit the scene which allowed devs to
                       compile C &amp; C++ for the web.
 
-                      If you remember a while back we had some talks on
-                      using emscripten to port old games to the web.
-
                       This was a time of crazy experiments with everything from
                       the python interpteter to the Linux kernel being ported to
                       the browser. You name it, it was ported. It really opened
@@ -334,18 +325,21 @@ see when you view source in a browser.
                     <li class="fragment">iteration on everything we've learned</li>
                     <li class="fragment">same toolchain</li>
                     <li class="fragment"><strong>asm.js is the polyfill</strong><sup><a href="https://brendaneich.com/2015/06/from-asm-js-to-webassembly/">1</a></li>
-                    <li class="fragment">all this cool stuff is coming to wasm :tada:</li>
+                    <li class="fragment">all this cool stuff is coming to wasm 🎉</li>
                   </ul>
                   <aside class="notes">
-                    So this is where WebAssembly comes in. Ultimately it's an
+                    So this is where WebAssembly comes in, to cut out that
+                    asm.js middleman. Instead of coming up with a brand
+                    new piece of browser tech, wasm is actually an
                     iteration on the work done with asm.js and everything we've
                     learned from that experience.
 
                     Further, today's emscripten tools can output to webassembly
                     which means we've got a faster 1:1 map to webassembly with
-                    the same toolchain.
+                    the same toolchain as people have been using for the past
+                    however many years.
 
-                    Thirdly, and this is the cool thing, wasm implements all the
+                    Also, and this is the cool thing, wasm implements all the
                     same featuers as asm.js to the point that asm.js can be used
                     as the polyfill for wasm in browsers that don't implement
                     it yet. This means we can start using webassembly today
@@ -377,12 +371,12 @@ see when you view source in a browser.
                       binary format we saw earlier.
 
                       The next step is to load up and bootstrap your module
-                      using Javascript. Webassembly isn't a standalone language
-                      that runs in your browser, it still needs to interface
-                      with JS.
+                      using Javascript. Webassembly isn't a first class language
+                      like Javascript (yet), so we still need to interface with
+                      JS to give it inputs and display the outputs.
 
-                      Once you've done this, you're ready to go! This is what
-                      dreams are made of! You can do anything you want!
+                      But once you've done this, you're ready to go! This is what
+                      dreams are made of!
                     </aside>
                   </section>
                   <section data-background="images/matrix/matrix-2.png" data-background-transition="slide" data-time="55">
@@ -470,7 +464,7 @@ see when you view source in a browser.
                   <h2>Real world</h2>
                   <img class="plain fragment" src="images/cat.gif" alt="i don't know what I'm doing">
                   <p class="fragment"><small><a href="https://commons.wikimedia.org/wiki/File:Cat.gif">by user Mkamale90</a> under the Creative Commons Attribution-Share Alike 3.0 Unported license</small></p>
-                  <p class="fragment">tldr: the tooling isn't good enough for everyday use</p>
+                  <p class="fragment">tldr: the tooling isn't good enough for everyday use <em>imo</em></p>
                 </section>
                 <section>
                   <h2>But…</h2>
@@ -490,13 +484,6 @@ see when you view source in a browser.
                   <p><a href="https://github.com/shamadee/web-dsp">web dsp</a></p>
                 </section>
                 </section>
-                <!-- <section data-background="images/performance.png">
-                  <h2>Performance</h2>
-                  <ul>
-                    <li>Better in theory, still a WIP</li>
-                    <li>Reported slowness </li>
-                  </ul>
-                </section> -->
                 <section data-background="images/bugs-or8.png" data-background-transition="slide">
                   <h2>Debugging</h2>
                   <ul>
