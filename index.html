@@ -379,10 +379,19 @@ see when you view source in a browser.
                   </section>
                   <section data-background="images/matrix/matrix-2.png" data-background-transition="slide" data-time="55">
                     <h2>Compile code</h2>
+                    <p>
+                      <a href="https://github.com/AshKyd/wasm-demos">
+                        <span class="attribution">github.com/</span><strong>AshKyd/wasm-demos</strong>
+                      </a>
+                    </p>
+                    <div class="fragment">
                     <h3>C <span class="attribution">via Emscripten</span></h3>
-                    <pre><code>emcc main.c -s WASM=1 -o out.html</code></pre>
+                    <pre style="text-align:center"><code>emcc main.c -s WASM=1 -o out.html</code></pre>
+                    </div>
+                    <div class="fragment">
                     <h3>Rust</h3>
-                    <pre><code>rustc --target=wasm32-unknown-emscripten main.rs -o out.html</code></pre>
+                    <pre style="text-align:center"><code>rustc --target=wasm32-unknown-emscripten main.rs -o out.html</code></pre>
+                    </div>
                     <aside class="notes">
                       To do the actual compiling, there's a few different ways
                       to go about it. C and C++ can both be compiled directly
