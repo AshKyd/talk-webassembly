@@ -16,7 +16,8 @@
           .reveal table{color:#fff;}
           .reveal table pre{width:auto;margin:0;box-shadow: none;}
           .reveal ul.no-bullets{list-style:none;}
-          .reveal p.attribution{font-size:0.7em;opacity:0.9em;}
+          .reveal p.attribution,
+          .reveal span.attribution{font-size:0.7em;opacity:0.9em;}
         </style>
 
         <script defer>
@@ -184,7 +185,7 @@ see when you view source in a browser.
                     apps where extra performance is required.
                   </aside>
                 </section>
-                <section data-background="images/demos-blurred.jpg" data-background-transition="slide">
+                <section data-background-transition="slide">
                   <section data-time="60">
                     <h2>Some history</h2>
                     <div class="fragment">
@@ -222,7 +223,7 @@ see when you view source in a browser.
                   <section data-time="30">
                     <h2>
                       <a href="https://github.com/kripken/emscripten">
-                        <img alt="emscripten" src="images/emscripten-logo.svg" class="plain">
+                        <img alt="emscripten" src="images/emscripten-logo.png" class="plain">
                       </a>
                     </h2>
                     <p>compiles C and C++ into JavaScript</p>
@@ -240,7 +241,7 @@ see when you view source in a browser.
                       could be run.
                     </aside>
                   </section>
-                  <section data-background="images/demos-blurred.jpg" data-time="50">
+                  <section data-time="50">
                     <h2>Random cool stuff</h2>
                     <ul>
                       <li>Unity, Unreal &amp; other game engines</li>
@@ -261,7 +262,7 @@ see when you view source in a browser.
                       ~ explain sqlite, qemu, ffmpeg ~
                     </aside>
                   </section>
-                  <section data-background="images/demos-blurred.jpg" data-time="30">
+                  <section data-time="30">
                     <div class="row">
                       <div>
                         <h3>Recently</h3>
@@ -286,9 +287,6 @@ see when you view source in a browser.
                       and bring them to new generations. My favourite is probably
                       Simcity (a classic!) You should definitely check them out.
                     </aside>
-                  </section>
-                  <section data-background="images/demos.jpg">
-                    <h2 style="background:black;padding:0.2em;color:white;">All the games</h2>
                   </section>
                 </section>
                 <section data-time="40">
@@ -381,7 +379,7 @@ see when you view source in a browser.
                   </section>
                   <section data-background="images/matrix/matrix-2.png" data-background-transition="slide" data-time="55">
                     <h2>Compile code</h2>
-                    <h3>C</h3>
+                    <h3>C <span class="attribution">via Emscripten</span></h3>
                     <pre><code>emcc main.c -s WASM=1 -o out.html</code></pre>
                     <h3>Rust</h3>
                     <pre><code>rustc --target=wasm32-unknown-emscripten main.rs -o out.html</code></pre>
@@ -453,86 +451,65 @@ see when you view source in a browser.
                   </section>
                 </section>
                 <section>
-                  <h2>Memory</h2>
-                  <ul>
-                    <li>resizeable ArrayBuffer</li>
-                    <li>access it from both JS &amp; wasm</li>
-                    <li>the only way you can pass around complex data types</li>
-                  </ul>
-                </section>
-                <section>
-                  <h2>Real world</h2>
-                  <img class="plain fragment" src="images/cat.gif" alt="i don't know what I'm doing">
-                  <p class="fragment"><small><a href="https://commons.wikimedia.org/wiki/File:Cat.gif">by user Mkamale90</a> under the Creative Commons Attribution-Share Alike 3.0 Unported license</small></p>
-                  <p class="fragment">tldr: the tooling isn't good enough for everyday use <em>imo</em></p>
-                </section>
-                <section>
-                  <h2>But…</h2>
-                  <p>I don't expect it to take long</p>
-                </section>
-                <section>
-                  <h2>Prime use case</h2>
-                  <blockquote><p>WebDSP is a collection of
-                    algorithms designed to be building blocks for web
-                    appslications that operate on media data.</p>
-
-                    <p>The methods
-                    are written in C++ and compiled to WASM, and exposed as
-                    simple vanilla Javascript functions developers can run on
-                    the client side.</p>
-                  </blockquote>
-                  <p><a href="https://github.com/shamadee/web-dsp">web dsp</a></p>
-                </section>
-                </section>
-                <section data-background="images/bugs-or8.png" data-background-transition="slide">
-                  <h2>Debugging</h2>
-                  <ul>
-                    <li class="fragment">devtools</li>
-                    <li class="fragment"2>wasm text representation — no sourcemaps</li>
-                  </ul>
-                </section>
-                <section data-background="images/security-or8.png" data-background-transition="slide">
-                  <h2>Security</h2>
-                  <ul>
-                    <li>Sandbox</li>
-                    <li>Same origin policy</li>
-                    <li>Control flow integrity</li>
-                    <li>Memory safety</li>
-                  </ul>
-                  <p class="fragment"><a href="http://webassembly.org/docs/security/">webassembly.org/docs/security</a></p>
-                </section>
-                <section data-background="images/support.jpg" data-background-transition="slide" style="margin-left: -25%;">
-                  <h2>Browser Support</h2>
-                  <table>
-                    <thead>
-                    <tr><th>Browser</th><th>Version</th></tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>Firefox <br><small>desktop &amp; mobile</small></td><td>52 <br><small>march 28</small></td></tr>
-                    <tr><td>Chrome <br><small>desktop &amp; mobile</small></td><td>57<br><small>march 29</small></td></tr>
-                    <tr><td>Opera</td><td>44</td></tr>
-                    <tr><td>Safari</td><td>⛔</td></tr>
-                    <tr><td>Edge</td><td>⛔</td></tr>
-                    </tbody>
-                  </table>
-                  <p><small>Photo: <a href="https://www.flickr.com/photos/atoach/3922401551">Tim Green</a></small></p>
-                </section>
-                <section>
-                  <h2>(a glimpse of) the future</h2>
-                  <ul class="no-bullets">
-                    <li class="fragment">:scream: sourcemaps</li>
-                    <li class="fragment">👷 improved tooling</li>
-                    <li class="fragment">🚮 garbage collection</li>
-                    <li class="fragment">🏗️ DOM access &amp; web API integration</li>
-                    <li class="fragment">✨ support for JS data types (strings, objects)</li>
-                  </ul>
-                  <p><a href="http://webassembly.org/docs/future-features/">wasm future features</a></p>
-                </section>
-                <section>
                   <h2>Conclusion</h2>
-                  <p>❌ probably too early for greenfields</p>
-                  <p>✔ good for porting stuff</p>
+                  <p>✔ good for porting things</p>
+                  <p>🤔 works well for specific scenarios</p>
                   <p class="fragment">👍 go hack stuff!</p>
+                </section>
+                <section>
+                  <section>
+                    <h2>Memory</h2>
+                    <ul>
+                      <li>resizeable ArrayBuffer</li>
+                      <li>access it from both JS &amp; wasm</li>
+                      <li>the only way you can pass around complex data types</li>
+                      <li class="fragment">use the <code>TextEncoder</code>/<code>TextDecoder</code> APIs</li>
+                    </ul>
+                  </section>
+                  <section data-background="images/bugs-or8.png" data-background-transition="slide">
+                    <h2>Debugging</h2>
+                    <ul>
+                      <li class="fragment">devtools</li>
+                      <li class="fragment"2>wasm text representation — no sourcemaps</li>
+                    </ul>
+                  </section>
+                  <section data-background="images/security-or8.png" data-background-transition="slide">
+                    <h2>Security</h2>
+                    <ul>
+                      <li>Sandbox</li>
+                      <li>Same origin policy</li>
+                      <li>Control flow integrity</li>
+                      <li>Memory safety</li>
+                    </ul>
+                    <p class="fragment"><a href="http://webassembly.org/docs/security/">webassembly.org/docs/security</a></p>
+                  </section>
+                  <section data-background="images/support.jpg" data-background-transition="slide">
+                    <h2>Browser Support</h2>
+                    <table>
+                      <thead>
+                      <tr><th>Browser</th><th>Version</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Firefox <br><small>desktop &amp; mobile</small></td><td>52 <br><small>march 28</small></td></tr>
+                      <tr><td>Chrome <br><small>desktop &amp; mobile</small></td><td>57<br><small>march 29</small></td></tr>
+                      <tr><td>Opera</td><td>44</td></tr>
+                      <tr><td>Safari</td><td>⛔</td></tr>
+                      <tr><td>Edge</td><td>⛔</td></tr>
+                      </tbody>
+                    </table>
+                    <p><small>Photo: <a href="https://www.flickr.com/photos/atoach/3922401551">Tim Green</a></small></p>
+                  </section>
+                  <section>
+                    <h2>(a glimpse of) the future</h2>
+                    <ul class="no-bullets">
+                      <li class="fragment">:scream: sourcemaps</li>
+                      <li class="fragment">👷 improved tooling</li>
+                      <li class="fragment">🚮 garbage collection</li>
+                      <li class="fragment">🏗️ DOM access &amp; web API integration</li>
+                      <li class="fragment">✨ support for JS data types (strings, objects)</li>
+                    </ul>
+                    <p><a href="http://webassembly.org/docs/future-features/">wasm future features</a></p>
+                  </section>
                 </section>
                 <section data-time="25">
                   <h1><img src="images/webassembly-logo.svg" alt="WebAssembly" class="plain"></h1>
