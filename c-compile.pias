@@ -1,0 +1,266 @@
+{
+  "events": [
+    {
+      "act": "OPEN",
+      "size": [
+        57,
+        13
+      ],
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "WRITE",
+      "data": "$ ",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "READ",
+      "data": "\r",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "ECHO",
+      "data": "cat main",
+      "pause": "BEFORE",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "READ",
+      "data": "\t",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "WRITE",
+      "data": ".c ",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "READ",
+      "data": "\r",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "WRITE",
+      "data": "\r\n",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "PAUSE",
+      "duration": 0.0023550987243652344
+    },
+    {
+      "act": "WRITE",
+      "data": "#include<stdio.h>\r\n\r\nmain()\r\n{\r\n    printf(\"Hello World\\n\");\r\n}\r\n\r\n",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "PAUSE",
+      "duration": 0.009007930755615234
+    },
+    {
+      "act": "WRITE",
+      "data": "\u001b]777;notify;Command completed;cat main.c \u0007\u001b]0;ash@ash-xps13b:~/Web/prac-webassembly/hello-world-c\u0007\u001b]7;file://ash-xps13b/home/ash/Web/prac-webassembly/hello-world-c\u0007$ ",
+      "term": "71f90e41872a48219588855bb8357b27",
+      "pause": "AFTER"
+    },
+    {
+      "act": "ECHO",
+      "data": "gcc main.c -o out.bin",
+      "pause": "AFTER",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "READ",
+      "data": "\r",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "WRITE",
+      "data": "\r\n",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "PAUSE",
+      "duration": 0.5
+    },
+    {
+      "act": "WRITE",
+      "data": "\u001b]777;notify;Command completed;gcc main.c -o out.bin\u0007\u001b]0;ash@ash-xps13b:~/Web/prac-webassembly/hello-world-c\u0007\u001b]7;file://ash-xps13b/home/ash/Web/prac-webassembly/hello-world-c\u0007$ ",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "ECHO",
+      "pause": "BEFORE",
+      "data": "ls -lh",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "READ",
+      "data": "\r",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "WRITE",
+      "data": "\r\n",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "PAUSE",
+      "duration": 0.0043489933013916016
+    },
+    {
+      "act": "WRITE",
+      "data": "total 20K\r\n-rw-rw-r--. 1 ash ash  347 Jun 26 21:34 compile.sh\r\n-rw-rw-r--. 1 ash ash   60 Sep 25 18:59 main.c\r\n-rwxrwxr-x. 1 ash ash 8.1K Sep 25 19:00 \u001b[0m\u001b[38;5;40mout.bin\u001b[0m\r\n",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "PAUSE",
+      "duration": 0.0006079673767089844
+    },
+    {
+      "act": "WRITE",
+      "data": "\u001b]777;notify;Command completed;ls -lh\u0007\u001b]0;ash@ash-xps13b:~/Web/prac-webassembly/hello-world-c\u0007\u001b]7;file://ash-xps13b/home/ash/Web/prac-webassembly/hello-world-c\u0007$ ",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "ECHO",
+      "pause": "BEFORE",
+      "data": "./out.bin",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "READ",
+      "data": "\r",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "WRITE",
+      "data": "\r\n",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "PAUSE",
+      "duration": 0.0019240379333496094
+    },
+    {
+      "act": "WRITE",
+      "data": "Hello World\r\n",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "PAUSE",
+      "duration": 0.008810997009277344
+    },
+    {
+      "act": "WRITE",
+      "data": "\u001b]777;notify;Command completed;./out.bin\u0007\u001b]0;ash@ash-xps13b:~/Web/prac-webassembly/hello-world-c\u0007\u001b]7;file://ash-xps13b/home/ash/Web/prac-webassembly/hello-world-c\u0007$ ",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "ECHO",
+      "pause": "BEFORE",
+      "data": "emcc m",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "READ",
+      "data": "\t",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "WRITE",
+      "data": "ain.c ",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "ECHO",
+      "pause": "AFTER",
+      "data": "-s WASM=1 -o out.js",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "READ",
+      "data": "\r",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "WRITE",
+      "data": "\r\n",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "PAUSE",
+      "duration": 2
+    },
+    {
+      "act": "WRITE",
+      "data": "\u001b]777;notify;Command completed;emcc main.c -s WASM=1 -o out.js\u0007\u001b]0;ash@ash-xps13b:~/Web/prac-webassembly/hello-world-c\u0007\u001b]7;file://ash-xps13b/home/ash/Web/prac-webassembly/hello-world-c\u0007$ ",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "ECHO",
+      "pause": "BEFORE",
+      "data": "ls -lh",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "READ",
+      "data": "\r",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "WRITE",
+      "data": "\r\n",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "PAUSE",
+      "duration": 0.004051923751831055
+    },
+    {
+      "act": "WRITE",
+      "data": "total 164K\r\n-rw-rw-r--. 1 ash ash  347 Jun 26 21:34 compile.sh\r\n-rw-rw-r--. 1 ash ash   60 Sep 25 18:59 main.c\r\n-rwxrwxr-x. 1 ash ash 8.1K Sep 25 19:00 \u001b[0m\u001b[38;5;40mout.bin\u001b[0m\r\n-rw-rw-r--. 1 ash ash  95K Sep 25 19:01 out.js\r\n-rw-rw-r--. 1 ash ash  47K Sep 25 19:01 out.wasm\r\n",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "PAUSE",
+      "duration": 0.0018091201782226562
+    },
+    {
+      "act": "WRITE",
+      "data": "\u001b]777;notify;Command completed;ls -lh\u0007\u001b]0;ash@ash-xps13b:~/Web/prac-webassembly/hello-world-c\u0007\u001b]7;file://ash-xps13b/home/ash/Web/prac-webassembly/hello-world-c\u0007$ ",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "ECHO",
+      "pause": "BEFORE",
+      "data": "node out.js",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "READ",
+      "data": "\r",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "WRITE",
+      "data": "\r\n",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "PAUSE",
+      "duration": 0.47025084495544434
+    },
+    {
+      "act": "WRITE",
+      "data": "Hello World\r\n",
+      "term": "71f90e41872a48219588855bb8357b27"
+    },
+    {
+      "act": "WRITE",
+      "data": "$ ",
+      "term": "71f90e41872a48219588855bb8357b27"
+    }
+  ],
+  "shell": "/usr/bin/bash"
+}

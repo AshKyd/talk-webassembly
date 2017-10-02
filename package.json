@@ -8,5 +8,8 @@
   },
   "author": "Ash Kyd <ash@kyd.com.au>",
   "license": "ISC",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "reveal.js": "^3.5.0"
+  }
 }
