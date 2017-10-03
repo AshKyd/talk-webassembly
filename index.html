@@ -76,6 +76,9 @@
         </style>
 
         <script defer>
+          navigator.serviceWorker.register('service-worker.js', {
+            scope: '/'
+          });
           document.addEventListener('DOMContentLoaded', () => {
             Array.from(document.querySelectorAll('pre.reformat'))
               .forEach(ele => ele.innerHTML = ele.innerHTML.replace(/\n +/g, '\n'));
