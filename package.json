@@ -4,7 +4,8 @@
   "description": "A talk on WebAssembly in early 2017",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "./build.sh"
   },
   "author": "Ash Kyd <ash@kyd.com.au>",
   "license": "ISC",

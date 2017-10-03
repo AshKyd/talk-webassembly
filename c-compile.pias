@@ -233,7 +233,7 @@
     },
     {
       "act": "ECHO",
-      "pause": "BEFORE",
+      "pause": "BOTH",
       "data": "node out.js",
       "term": "71f90e41872a48219588855bb8357b27"
     },

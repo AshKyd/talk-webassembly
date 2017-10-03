@@ -1,10 +1,10 @@
 <html>
   <head>
         <meta charset="utf-8">
-        <script defer src="node_modules/reveal.js/js/reveal.js"></script>
+        <script defer src="vendor/reveal.js"></script>
         <script defer src="play-it-in-revealjs.js"></script>
-        <link rel="stylesheet" href="node_modules/reveal.js/css/reveal.css">
-        <link rel="stylesheet" href="node_modules/reveal.js/css/theme/black.css">
+        <link rel="stylesheet" href="vendor/reveal.css">
+        <link rel="stylesheet" href="vendor/black.css">
 
         <style type="text/css">
           body{background: #262530;}
@@ -144,7 +144,7 @@
               <section id="wasm-description">
                 <blockquote cite="http://webassembly.org/">WebAssembly (or wasm) is a new portable, size- and
                   load-time-efficient format suitable for compilation to the web.</blockquote>
-                  <a href="http://webassembly.org/">webassembly.8rg</a>
+                  <a href="http://webassembly.org/">webassembly.org</a>
               </section>
               <section id="wasm-precompiled-workflow">
                 <h2>WebAssembly precompiled workflow</h2>
@@ -265,10 +265,10 @@
             <section id="concepts-and-walkthrough">
               <section id="js-code-demo">
                 <h2>WebAssembly concepts in code</h2>
-                <pre class="reformat" style="font-size:28px;"><code><span class="fragment">fetch('program.wasm')
-                  &#9;.then( response   => response.arrayBuffer() )</span>
+                <pre class="reformat" style="font-size:28px;"><code><span class="fragment">fetch('program.wasm')</span>
+                  &#9;<span class="fragment">.then( response   => response.arrayBuffer() )</span>
                   &#9;<span class="fragment">.then( buffer     => <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/compile">WebAssembly.compile</a>(buffer) )</span>
-                  &#9;<span class="fragment">.then( wasmModule => <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/instantiate">WebAssembly.instantiate</a>(wasmModule, {
+                  &#9;<span class="fragment">.then( wasmModule => </span><span class="fragment"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/instantiate">WebAssembly.instantiate</a>(wasmModule</span><span class="fragment">, {
                   &#9;&#9;env: { printf: someFunction }
                   &#9;}))</span>
                   &#9;<span class="fragment">.then( results    => results.exports.main() );</span></code></pre>
@@ -334,63 +334,74 @@
               </section>
             </section>
             <section id="running-wasm-demo">
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/1.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/2.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/3.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/4.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/5.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/6.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/7.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/8.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/9.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/10.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/11.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/12.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/13.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/14.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/15.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/16.webm"></video>
               </section>
-              <section data-transition="none">
+              <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/17.webm"></video>
+              </section>
+              <section id="js-code-demo-annotated" data-background="black">
+                <h2 style="margin-top:171px">The final product</h2>
+                <pre class="reformat" style="font-size:28px;"><code>fetch('program.wasm')
+                  &#9;.then( response   => response.arrayBuffer() )
+                  &#9;.then( buffer     => <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/compile">WebAssembly.compile</a>(buffer) )
+                  &#9;.then( wasmModule => <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/instantiate">WebAssembly.instantiate</a>(wasmModule, {
+                  &#9;&#9;env: { printf: someFunction }
+                  &#9;}))
+                  &#9;.then( results    => results.exports.main() );</code></pre>
+                  <img alt="" src="images/overlay-textdecoder.svg" class="plain fragment overlay">
               </section>
               <section id="summary">
                 <div class="row">
                   <div class="col">
-                    <h2>Raw wasm power!</h2>
+                    <h2 style="margin-top:200px;">Raw wasm power!</h2>
                     <ul>
-                      <li class="fragment">data typees</li>
+                      <li class="fragment">data types</li>
                       <li class="fragment">imports &amp; exports</li>
                       <li class="fragment">isolated memory</li>
                     </ul>
@@ -409,8 +420,7 @@
                   </a>
                   <!-- todo: scribbles compile to js, asm.js, wasm output, -->
                 </h2>
-                <p>compiles C and C++ into JavaScript</p>
-                <img alt="" src="images/overlay-compile-to-js.svg" class="plain fragment overlay">
+                <p  class="fragment">compiles C and C++ into JavaScript</p>
                 <p class="fragment">port <a href="https://github.com/kripken/emscripten/wiki/Porting-Examples-and-Demos">everything</a> to the browser!</p>
                 <img alt="" src="images/overlay-asmjs.svg" class="plain fragment overlay">
                 <img alt="" src="images/overlay-compile-to-wasm.svg" class="plain fragment overlay">
@@ -420,14 +430,14 @@
                 <ul>
                   <li>Unity, Unreal &amp; other game engines</li>
                   <li>languages: lua, python, ruby, .NET runtime</li>
-                  <li>sqlite, qemu, ffmpeg</li>
+                  <li>sqlite, ffmpeg, qemu</li>
                 </ul>
                 <p class="fragment">and so much more&hellip;</p>
               </section>
               <section id="internet-archive" data-background="images/demos-blurred.jpg">
-                <div class="row left">
+                <div class="row">
                   <div>
-                    <h3>Recently</h3>
+                    <h3 style="margin-top:180px;">Recently</h3>
                     <ul>
                       <li>Internet Archive</li>
                       <li>play old games!</li>
