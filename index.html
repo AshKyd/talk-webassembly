@@ -35,6 +35,9 @@
           .a1-attribution{position:absolute;top:calc(50% + 610px);width:100%;text-align:center;}
           .reveal .headingthing{border-bottom:3px solid white;margin-top:30px;margin-bottom:10px; opacity:0.6;}
 
+          .reveal .fragment.disappear.visible:not(.current-fragment){opacity:0 !important;}
+          .reveal .fragment.disappear.visible.current-fragment{opacity:1;}
+
           /* Hacky cursor blink in play it again sam thing. */
           span[style="background:#00ff00;color:#ffffff;"]{
             animation: 0.8s cursor-blink infinite;
@@ -288,8 +291,10 @@
                 <tr><td>Float</td><td>✔</td><td>✔</td></tr>
                 </tbody>
                 </table>
-                <img src="images/kitty-string.svg" alt="" class="plain">
-                <img src="images/kitty-no-string.svg" alt="strings aren't supported" class="plain fragment">
+                <img style="position:absolute;left:calc(50% - 170px)" src="images/kitty-string.svg" alt="" class="fragment plain disappear">
+                <img style="position:absolute;left:calc(50% - 170px)" src="images/kitty-no-string.svg" alt="strings aren't supported" class="plain fragment disappear">
+                <img style="position:absolute;left:calc(50% - 170px)" src="images/kitty-no-kitty.svg" alt="and neither are objects" class="plain fragment disappear">
+                <span class="fragment"></span>
               </section>
               <section id="memory">
                 <h2>WebAssembly Memory</h2>
