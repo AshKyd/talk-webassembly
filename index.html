@@ -1,6 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
         <meta charset="utf-8">
+        <title>WebAssembly 101 @ Fronteers</title>
         <script defer src="vendor/reveal.js"></script>
         <script defer src="play-it-in-revealjs.js"></script>
         <link rel="stylesheet" href="vendor/reveal.css">
@@ -78,19 +80,29 @@
           }
         </style>
 
-        <script defer>
-          navigator.serviceWorker.register('service-worker.js', {
-            scope: '/'
-          });
-          document.addEventListener('DOMContentLoaded', () => {
-            Array.from(document.querySelectorAll('pre.reformat'))
-              .forEach(ele => ele.innerHTML = ele.innerHTML.replace(/\n +/g, '\n'));
-            Reveal.initialize({
-              history: true,
-              width:1280,
-              height:720,
+        <script>
+            if(String(window.location).includes('?debug')){
+              console.log('no worker');
+              navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {
+                  registration.unregister()
+                }
+              });
+            } else {
+              console.log('registering worker');
+              navigator.serviceWorker.register('service-worker2.js', {
+                scope: '/'
+              });
+            }
+            document.addEventListener('DOMContentLoaded', () => {
+              Array.from(document.querySelectorAll('pre.reformat'))
+                .forEach(ele => ele.innerHTML = ele.innerHTML.replace(/\n +/g, '\n'));
+              Reveal.initialize({
+                history: true,
+                width:1280,
+                height:720,
+              });
             });
-          });
         </script>
     </head>
     <body>
@@ -334,16 +346,16 @@
             </section>
             <section id="wasm-explorer-demo">
               <section data-transition="none">
-                <video class="stretch" src="videos/wasm-explorer-1.webm">
+                <video class="stretch" src="videos/wasm-explorer-1.webm"></video>
               </section>
               <section data-transition="none">
-                <video class="stretch" data-autoplay src="videos/wasm-explorer-1.webm">
+                <video class="stretch" data-autoplay src="videos/wasm-explorer-1.webm"></video>
               </section>
               <section data-transition="none">
-                <video class="stretch" data-autoplay src="videos/wasm-explorer-2.webm">
+                <video class="stretch" data-autoplay src="videos/wasm-explorer-2.webm"></video>
               </section>
               <section data-transition="none">
-                <video class="stretch" data-autoplay src="videos/wasm-explorer-3.webm">
+                <video class="stretch" data-autoplay src="videos/wasm-explorer-3.webm"></video>
               </section>
             </section>
             <section id="running-wasm-demo">
@@ -424,8 +436,9 @@
                     <p class="fragment">innovation in wheel technology</p>
                   </div>
                   <div class="col">
-                    <img src="images/pinwheel.svg" class="plain">
+                    <img src="images/pinwheel.svg" class="plain" alt="">
                   </div>
+                </div>
               </section>
             </section>
             <section id="emscripten-intro">
@@ -441,7 +454,7 @@
                 <img alt="" src="images/overlay-asmjs.svg" class="plain fragment overlay">
                 <img alt="" src="images/overlay-compile-to-wasm.svg" class="plain fragment overlay">
               </section>
-              <section id="random-cool-stuff" data-background="images/demos-blurred.jpg">
+              <section id="random-cool-stuff" data-background-image="images/demos-blurred.jpg">
                 <h2>Random cool stuff</h2>
                 <ul>
                   <li>Unity, Unreal &amp; other game engines</li>
@@ -450,7 +463,7 @@
                 </ul>
                 <p class="fragment">and so much more&hellip;</p>
               </section>
-              <section id="internet-archive" data-background="images/demos-blurred.jpg">
+              <section id="internet-archive" data-background-image="images/demos-blurred.jpg">
                 <div class="row">
                   <div>
                     <h3 style="margin-top:180px;">Recently</h3>
@@ -462,24 +475,24 @@
                     </ul>
                   </div>
                   <div>
-                    <img src="images/internet-archive-tall.png">
+                    <img src="images/internet-archive-tall.png" alt="">
                   </div>
                 </div>
               </section>
-              <section id="all-the-games" data-background="images/demos.jpg">
+              <section id="all-the-games" data-background-image="images/demos.jpg">
                 <h2 style="background:black;padding:0.2em;color:white;">All the games</h2>
               </section>
-              <section id="pesky-details" data-background="images/demos.jpg">
+              <section id="pesky-details" data-background-image="images/demos.jpg">
                 <h2 style="background:black;padding:0.2em;color:white;">Smooths away those pesky details</h2>
               </section>
             </section>
-            <section id="emscripten-demo">
+            <section>
               <section id="c-compile-demo"  class="terminal" data-samElement="#c-compile-demo-terminal" data-samFile="c-compile.pias">
                   <div id="c-compile-demo-terminal" class="emulator">demo code should appear here... if not something has gone terribly wrong :o</div>
               </section>
-              <section id="pesky-details-redux" data-background="images/demos.jpg">
-                <h2 style="background:black;padding:0.2em;color:white;">Smooths away those pesky details</h2>
-              </section>
+            </section>
+            <section id="pesky-details-redux" data-background-image="images/demos.jpg">
+              <h2 style="background:black;padding:0.2em;color:white;">Smooths away those pesky details</h2>
             </section>
             <section id="where-from-here">
               <section id="what-can-we-do">
@@ -499,7 +512,7 @@
                   <li class="fragment">many languages for the web</li>
                 </ul>
               </section>
-              <section id="more-resources">
+              <section id="more-resources" data-background-image="images/bne-blurred.png">
                 <div class="row">
                   <div class="col">
                     <h2><img src="images/webassembly-logo.svg" alt="WebAssembly" class="plain"></h2>
@@ -508,18 +521,18 @@
                   </div>
                   <div class="col left">
                     <h2>Some resources</h2>
-                    <div class="fragment">
+                    <div class="">
                       <div class="headingthing">intro</div>
                       <ul><li><div><a href="https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/">cartoon wasm</a> - Lin Clark</div></li></ul>
                     </div>
-                    <div class="fragment">
+                    <div class="">
                       <div class="headingthing">usage</div>
                       <ul>
                         <li><div><a href="https://kripken.github.io/emscripten-site/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html">emscripten interacting with code</a></div></li>
                         <li><div><a href="https://medium.com/@ianjsikes/get-started-with-rust-webassembly-and-webpack-58d28e219635">rust webpack</a> - Ian Sikes</div></li>
                       </ul>
                     </div>
-                    <div class="fragment">
+                    <div class="">
                       <div class="headingthing">more info</div>
                       <ul><li><div><a href="https://developer.mozilla.org/en-US/docs/WebAssembly">wasm mdn</a> - lots o' docs</div></li></ul>
                     </div>
