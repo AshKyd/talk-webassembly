@@ -97,11 +97,16 @@
         <div class="reveal">
           <div class="slides">
             <section id="intro">
-              <h1><img src="images/webassembly-logo.svg" alt="WebAssembly" class="plain"></h1>
-              <p style="font-size:0.6em;">@ashkyd | ash.ms</p>
-              <p><small><script>document.write(window.location)</script></small></p>
+              <section id="intro-intro" data-background="images/bne-blurred.png">
+                <h1><img src="images/webassembly-logo.svg" alt="WebAssembly" class="plain"></h1>
+                <p style="font-size:0.6em;">@ashkyd | ash.ms</p>
+                <p><small><script>document.write(window.location)</script></small></p>
+              </section>
+              <section id="intro-brisbane" data-background="images/bne.jpg">
+              </section>
             </section>
             <section id="intro-extended">
+              <section class="blank"></section>
               <section id="remember-when">
                 <h2>Remember when people used to write Javascript?</h2>
               </section>
@@ -278,7 +283,7 @@
                   &#9;&#9;env: { printf: someFunction }
                   &#9;}))</span>
                   &#9;<span class="fragment">.then( results    => results.exports.main() );</span></code></pre>
-                <p class="fragment"><strong>Eventually</strong>: <code>&lt;script type='module'&gt;</code> or ES6 imports</p>
+                <p class="fragment"><strong>Eventually</strong>: <code>&lt;script type='module'&gt;</code></p>
               </section>
               <section id="data-types">
                 <h2>Data types</h2>
@@ -363,7 +368,10 @@
               <section data-transition="none" data-background="black">
                   <video class="stretch" data-autoplay src="videos/coding-example/7.webm"></video>
               </section>
-              <section data-transition="none" data-background="black">
+              <section id="wasm-demo-breakout" data-background="black">
+                <img class="stretch plain" src="images/wasm-explorer-1.png" alt="the original code calls printf">
+              </section>
+              <section data-background="black" data-transition="fade-in">
                   <video class="stretch" data-autoplay src="videos/coding-example/8.webm"></video>
               </section>
               <section data-transition="none" data-background="black">
@@ -467,12 +475,10 @@
             </section>
             <section id="emscripten-demo">
               <section id="c-compile-demo"  class="terminal" data-samElement="#c-compile-demo-terminal" data-samFile="c-compile.pias">
-                  <div id="c-compile-demo-terminal" class="emulator">sam</div>
+                  <div id="c-compile-demo-terminal" class="emulator">demo code should appear here... if not something has gone terribly wrong :o</div>
               </section>
-              <section id="why-so-large">
-                <h2>So why is this so big?</h2>
-                <p class="fragment">complete solution</p>
-                <!-- kinda like jQuery -->
+              <section id="pesky-details-redux" data-background="images/demos.jpg">
+                <h2 style="background:black;padding:0.2em;color:white;">Smooths away those pesky details</h2>
               </section>
             </section>
             <section id="where-from-here">
@@ -481,9 +487,9 @@
                 <ul>
                   <li class="fragment">hack stuff</li>
                   <li class="fragment">build games</li>
-                  <li class="fragment">migrate existing asm.js</li>
+                  <li class="fragment">migrate existing projects</li>
+                  <li class="fragment">write modules</li>
                 </ul>
-                <p class="fragment">The future is near…</p>
               </section>
               <section>
                 <h2>The future looks like this:</h2>
